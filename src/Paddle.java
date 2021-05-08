@@ -20,6 +20,19 @@ public class Paddle {
         g.drawRect(x, y, w, h);
     }
 
+    int getLeft() {
+        return this.x;
+    }
+    int getRight() {
+        return this.x + this.w;
+    }
+    int getDown() {
+        return this.y + this.h;
+    }
+    int getUp() {
+        return this.y;
+    }
+
     void Update()   {
         this.x += this.speed;
         CollisionHandler();

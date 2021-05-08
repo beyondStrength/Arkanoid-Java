@@ -15,29 +15,35 @@ public class Ball{
     }
 
 
+    int getLeft() {
+        return this.x;
+    }
+    int getRight() {
+        return this.x + this.d;
+    }
+    int getDown() {
+        return this.y + this.d;
+    }
+    int getUp() {
+        return this.y;
+    }
+
     void Draw(Graphics g){
         g.setColor(Color.WHITE);
         g.drawOval(x, y, d, d);
 
     }
-    
+
     void CollisionHandler() {
-        if (x+d > 800){
-            x = 800 - d;
+        int right = x+d-1;
+        int left = x;
+        int up = y;
+        int down = y+d-1;
+
+        if (right > 800 || left < 0)
             speedX*= -1;
-        }
-        if (x < 0)  {
-            x = 0;
-            speedX*= -1;
-        }
-        if (y < 0)  {
-            y = 0;
+        if (up < 0 || down > 600)
             speedY*= -1;
-        }
-        if (y+d > 600)  {
-            y = 600 - d;
-            speedY*= -1;
-        }
             
     }
 

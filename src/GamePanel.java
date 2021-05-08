@@ -25,9 +25,25 @@ public class GamePanel extends JPanel{
     }
 
     public void Update(){
+
+        GlobalCollisionHandler();
         ball.Update();
         paddle.Update();
+         
         this.repaint();
+    }
+
+    public void GlobalCollisionHandler()  {
+        if (ball.getLeft() < paddle.getRight() &&
+        ball.getDown() > paddle.getUp() &&
+        ball.getRight() > paddle.getLeft())    {
+            ball.y = paddle.getUp() - ball.d;
+            ball.speedY*=-1;
+        }
+
+        if (ball.getUp() > paddle.getDown())
+            ball = new Ball();
+
     }
 
     public class kBInput extends KeyAdapter{
