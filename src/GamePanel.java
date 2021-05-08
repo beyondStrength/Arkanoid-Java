@@ -12,11 +12,10 @@ public class GamePanel extends JPanel{
         this.setFocusable(true);
         this.addKeyListener(new kBInput());
         this.setPreferredSize(new Dimension(800,600));
-        this.setBackground(Color.WHITE);
-        System.out.println("Game Panel criado");
+        this.setBackground(Color.BLACK);
 
-        paddle =  new Paddle(50,50,50,50);
-        ball = new Ball(50,50,50);
+        paddle = new Paddle();
+        ball = new Ball();
     }
 
     public void paintComponent(Graphics g){
@@ -26,14 +25,20 @@ public class GamePanel extends JPanel{
     }
 
     public void Update(){
-        ball.x++;
+        ball.Update();
+        paddle.Update();
         this.repaint();
     }
 
     public class kBInput extends KeyAdapter{
         public void keyPressed(KeyEvent e){
-            //System.out.println(e.getKeyCode());
+            paddle.keyPressed(e);
+            System.out.println(e.getKeyCode());
         }
 
+        public void keyReleased(KeyEvent e){
+            paddle.keyReleased(e);
+            System.out.println(e.getKeyCode());
+        }
     }
 }

@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 
 public class Ball{
@@ -5,26 +6,24 @@ public class Ball{
     int x,y,d;
     int speedX, speedY;
 
-    Ball(int x, int y, int d)  {
-        this.x = x;
-        this.y = y;
-        this.d = d;
+    Ball()  {
+        this.x = 385;
+        this.y = 285;
+        this.d = 30;
+        this.speedX=10;
+        this.speedY=10;
     }
 
 
     void Draw(Graphics g){
+        g.setColor(Color.WHITE);
         g.drawOval(x, y, d, d);
 
     }
     
-    void Start()    {
-        speedX=10;
-        speedY=10;
-    }
-
-    /*void CollisionHandler() {
-        if (x+d > (int)Game.dW){
-            x = (int)Game.dW - d;
+    void CollisionHandler() {
+        if (x+d > 800){
+            x = 800 - d;
             speedX*= -1;
         }
         if (x < 0)  {
@@ -35,17 +34,17 @@ public class Ball{
             y = 0;
             speedY*= -1;
         }
-        if (y+d > (int)Game.dH)  {
-            y = (int)Game.dH - d;
+        if (y+d > 600)  {
+            y = 600 - d;
             speedY*= -1;
         }
             
-    }*/
+    }
 
 
     void Update()   {
-        x+=speedX;
-        y-=speedY;
-        //CollisionHandler();
+        this.x += this.speedX;
+        this.y -= this.speedY;
+        CollisionHandler();
     }
 }
