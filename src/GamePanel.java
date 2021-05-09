@@ -49,12 +49,10 @@ public class GamePanel extends JPanel{
     public class kBInput extends KeyAdapter{
         public void keyPressed(KeyEvent e){
             paddle.keyPressed(e);
-            System.out.println(e.getKeyCode());
         }
 
         public void keyReleased(KeyEvent e){
             paddle.keyReleased(e);
-            System.out.println(e.getKeyCode());
         }
     }
 }
