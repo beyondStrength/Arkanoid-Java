@@ -18,11 +18,17 @@ public class Ball{
     int getLeft() {
         return this.x;
     }
+    int getMiddleX() {
+        return this.x + (this.d/2);
+    }
     int getRight() {
         return this.x + this.d;
     }
     int getDown() {
         return this.y + this.d;
+    }
+    int getMiddleY() {
+        return this.y + (this.d/2);
     }
     int getUp() {
         return this.y;
@@ -50,7 +56,7 @@ public class Ball{
 
     void Update()   {
         this.x += this.speedX;
-        this.y -= this.speedY;
+        this.y += this.speedY;
         CollisionHandler();
     }
 }

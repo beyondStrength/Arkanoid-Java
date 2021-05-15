@@ -23,11 +23,17 @@ public class Paddle {
     int getLeft() {
         return this.x;
     }
+    int getMiddleX() {
+        return this.x + (this.w/2);
+    }
     int getRight() {
         return this.x + this.w;
     }
     int getDown() {
         return this.y + this.h;
+    }
+    int getMiddleY() {
+        return this.y + (this.h/2);
     }
     int getUp() {
         return this.y;

@@ -37,13 +37,17 @@ public class GamePanel extends JPanel{
         if (ball.getLeft() < paddle.getRight() &&
         ball.getDown() > paddle.getUp() &&
         ball.getRight() > paddle.getLeft())    {
-            ball.y = paddle.getUp() - ball.d;
-            ball.speedY*=-1;
+            ball.speedY = -10;
+            if (ball.getMiddleX() > paddle.getMiddleX())    {
+                ball.speedX = ((ball.getMiddleX() - paddle.getMiddleX())/10)+6;
+            }else   {
+                ball.speedX = -(((paddle.getMiddleX() - ball.getMiddleX()) /10)+6);
+            }
         }
 
         if (ball.getUp() > paddle.getDown())
             ball = new Ball();
-
+        
     }
 
     public class kBInput extends KeyAdapter{
