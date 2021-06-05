@@ -3,7 +3,6 @@ import java.awt.Color;
 import java.util.Random;
 
 public class Block {
-    Ball ball;
     int x,y,w,h;
     boolean alive;
 
@@ -16,7 +15,13 @@ public class Block {
         alive = true;
     }
 
-
+    int getRand(int min, int max) {
+        Random r = new Random();
+        return r.nextInt((max - min) + 1) + min;
+    }
+    void Die(){
+        alive = false;
+    }
     int getLeft() {
         return this.x;
     }
@@ -35,24 +40,10 @@ public class Block {
     int getUp() {
         return this.y;
     }
-
-
-    int getRand(int min, int max) {
-        Random r = new Random();
-        return r.nextInt((max - min) + 1) + min;
-    }
-
     void Draw(Graphics g) {
+        if(alive){
         g.setColor(new Color((int)(Math.random() * 0x1000000)));
         g.drawRect(x, y, w, h);
-    }
-    void Update(){
-        CollisionHandler();
-    }
-    void CollisionHandler() {
-        if (ball.getLeft() < this.getRight() &ball.getLeft() < this.getLeft()){
-
         }
-
     }
 }

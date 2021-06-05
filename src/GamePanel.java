@@ -39,6 +39,7 @@ public class GamePanel extends JPanel{
             for (int j = 0; j < 16; j++) {
                 if (blocks[i][j].alive)
                     blocks[i][j].Draw(g);
+                
             }
         }
     }
@@ -65,7 +66,28 @@ public class GamePanel extends JPanel{
         }
 
         if (ball.getUp() > paddle.getDown())
-            ball = new Ball();
+            {ball = new Ball();}
+
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 16; j++) {
+                Block b = blocks[i][j];
+                if(b.alive){
+                    if(ball.getLeft() < b.getRight() && ball.getLeft() > b.getLeft() || ball.getLeft() < b.getRight() && ball.getLeft() > b.getLeft()){
+                        if(ball.getUp() < b.getDown() && ball.getUp() > b.getUp() || ball.getDown() < b.getUp() && ball.getDown() > b.getDown()){
+                        ball.speedY *= -1; 
+                        b.Die();
+                        if(ball.getMiddleX() < b.getRight() && ball.getMiddleX() > b.getLeft()){}                                                
+                        else{
+                            ball.speedX *= -1;
+                        }
+                        }
+                    }
+                    }
+                }}
+
+
+
+
         
     }
 
