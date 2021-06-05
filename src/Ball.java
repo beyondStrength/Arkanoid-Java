@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics;
 
+
 public class Ball{
 
     int x,y,d;
@@ -46,8 +47,14 @@ public class Ball{
         int up = y;
         int down = y+d-1;
 
-        if (right > 800 || left < 0)
-            speedX*= -1;
+        if (right > 800){
+            speedX *= -1;
+            x = 799-d;
+        }
+        if (left < 0){
+            speedX *= -1;
+            x = 1;
+        }
         if (up < 0 || down > 600)
             speedY*= -1;
             
