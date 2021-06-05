@@ -3,7 +3,7 @@ import javax.swing.*;
 
 public class GameFrame extends JFrame{
     GamePanel panel;
-    public static int ticks;
+    public static int lives;
 
     GameFrame(){
         panel = new GamePanel();
