@@ -6,6 +6,7 @@ public class App {
         while(true) {
 
             frame.panel.Update();
+            GameFrame.ticks++;
             Thread.sleep(1000/60);
         }
     }
