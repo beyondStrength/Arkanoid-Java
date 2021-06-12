@@ -7,6 +7,7 @@ public class GamePanel extends JPanel{
 
     Paddle paddle;
     Ball ball;
+    LifeBar life;
     Block[][] blocks = new Block[3][16];
 
     GamePanel(){
@@ -17,6 +18,7 @@ public class GamePanel extends JPanel{
 
         paddle = new Paddle();
         ball = new Ball();
+        life = new LifeBar();
 
         int x = 5;
         int y = 30;
@@ -34,6 +36,7 @@ public class GamePanel extends JPanel{
         super.paintComponent(g);
         paddle.Draw(g);
         ball.Draw(g);
+        life.Draw(g);
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 16; j++) {
@@ -49,6 +52,7 @@ public class GamePanel extends JPanel{
         GlobalCollisionHandler();
         ball.Update();
         paddle.Update();
+        life.Update();
          
         this.repaint();
     }
@@ -69,11 +73,14 @@ public class GamePanel extends JPanel{
         {
             GameFrame.lives--;
             ball = new Ball();
-            /*for (int i = 0; i < 3; i++) {
-                for (int j = 0; j < 16; j++) {
-                    blocks[i][j].alive = true;
+            paddle = new Paddle();
+            if (GameFrame.lives < 1)    {
+                for (int i = 0; i < 3; i++) {
+                    for (int j = 0; j < 16; j++) {
+                        blocks[i][j].alive = true;
+                    }
                 }
-            }*/                                     // RESETAR BLOCOS TODO: VIDAS
+            }
         }
 
         for (int i = 0; i < 3; i++) {
@@ -102,10 +109,12 @@ public class GamePanel extends JPanel{
     public class kBInput extends KeyAdapter{
         public void keyPressed(KeyEvent e){
             paddle.keyPressed(e);
+            ball.keyPressed(e);
         }
 
         public void keyReleased(KeyEvent e){
             paddle.keyReleased(e);
+            ball.keyReleased(e);
         }
     }
 }

@@ -3,7 +3,7 @@ import javax.swing.*;
 
 public class GameFrame extends JFrame{
     GamePanel panel;
-    public static int lives;
+    public static int lives = 3;
 
     GameFrame(){
         panel = new GamePanel();

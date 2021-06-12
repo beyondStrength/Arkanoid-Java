@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.*;
 
 
 public class Ball{
@@ -9,10 +10,10 @@ public class Ball{
 
     Ball()  {
         this.x = 385;
-        this.y = 285;
+        this.y = 405;
         this.d = 30;
-        this.speedX=10;
-        this.speedY=10;
+        this.speedX=0;
+        this.speedY=0;
     }
 
 
@@ -60,6 +61,24 @@ public class Ball{
             
     }
 
+    public void keyPressed(KeyEvent e){
+        if (speedX == 0 && speedY == 0){
+            switch(e.getKeyCode()){
+                case 65,37: //LEFT
+                speedX = -10;
+                speedY = -10;
+                break;
+    
+                case 93,39: //RIGHT
+                speedX = 10;
+                speedY = -10;
+                break;
+            }
+        }
+    }
+    public void keyReleased(KeyEvent e){
+
+    }
 
     void Update()   {
         this.x += this.speedX;
