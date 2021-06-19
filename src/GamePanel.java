@@ -7,6 +7,7 @@ public class GamePanel extends JPanel{
 
     Paddle paddle;
     Ball ball;
+    LifeBar life;
     Block[][] blocks = new Block[3][16];
 
     GamePanel(){
@@ -17,6 +18,7 @@ public class GamePanel extends JPanel{
 
         paddle = new Paddle();
         ball = new Ball();
+        life = new LifeBar();
 
         int x = 5;
         int y = 30;
@@ -34,12 +36,13 @@ public class GamePanel extends JPanel{
         super.paintComponent(g);
         paddle.Draw(g);
         ball.Draw(g);
+        life.Draw(g);
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 16; j++) {
                 if (blocks[i][j].alive)
                     blocks[i][j].Draw(g);
-                
+
             }
         }
     }
@@ -49,6 +52,7 @@ public class GamePanel extends JPanel{
         GlobalCollisionHandler();
         ball.Update();
         paddle.Update();
+        life.Update();
          
         this.repaint();
     }
@@ -66,14 +70,25 @@ public class GamePanel extends JPanel{
         }
 
         if (ball.getUp() > paddle.getDown())
-            {ball = new Ball();}
+        {
+            GameFrame.lives--;
+            ball = new Ball();
+            paddle = new Paddle();
+            if (GameFrame.lives < 1)    {
+                for (int i = 0; i < 3; i++) {
+                    for (int j = 0; j < 16; j++) {
+                        blocks[i][j].alive = true;
+                    }
+                }
+            }
+        }
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 16; j++) {
                 Block b = blocks[i][j];
                 if(b.alive){
-                    if(ball.getLeft() < b.getRight() && ball.getLeft() > b.getLeft() || ball.getLeft() < b.getRight() && ball.getLeft() > b.getLeft()){
-                        if(ball.getUp() < b.getDown() && ball.getUp() > b.getUp() || ball.getDown() < b.getUp() && ball.getDown() > b.getDown()){
+                    if(ball.getLeft() < b.getRight() && ball.getRight() > b.getLeft() || ball.getLeft() < b.getRight() && ball.getRight() > b.getLeft()){
+                        if(ball.getUp() < b.getDown() && ball.getDown() > b.getUp() || ball.getDown() < b.getUp() && ball.getUp() > b.getDown()){
                         ball.speedY *= -1; 
                         b.Die();
                         if(ball.getMiddleX() < b.getRight() && ball.getMiddleX() > b.getLeft()){}                                                
@@ -94,10 +109,12 @@ public class GamePanel extends JPanel{
     public class kBInput extends KeyAdapter{
         public void keyPressed(KeyEvent e){
             paddle.keyPressed(e);
+            ball.keyPressed(e);
         }
 
         public void keyReleased(KeyEvent e){
             paddle.keyReleased(e);
+            ball.keyReleased(e);
         }
     }
 }
