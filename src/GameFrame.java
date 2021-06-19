@@ -4,6 +4,7 @@ import javax.swing.*;
 public class GameFrame extends JFrame{
     GamePanel panel;
     public static int lives = 3;
+    public static int points = 0;
 
     GameFrame(){
         panel = new GamePanel();

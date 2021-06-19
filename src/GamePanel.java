@@ -5,6 +5,7 @@ import javax.swing.*;
 
 public class GamePanel extends JPanel{
 
+    ScoreBoard score;
     Paddle paddle;
     Ball ball;
     LifeBar life;
@@ -19,6 +20,7 @@ public class GamePanel extends JPanel{
         paddle = new Paddle();
         ball = new Ball();
         life = new LifeBar();
+        score = new ScoreBoard();
 
         int x = 5;
         int y = 30;
@@ -34,6 +36,7 @@ public class GamePanel extends JPanel{
 
     public void paintComponent(Graphics g){
         super.paintComponent(g);
+        score.Draw(g);
         paddle.Draw(g);
         ball.Draw(g);
         life.Draw(g);
@@ -53,6 +56,7 @@ public class GamePanel extends JPanel{
         ball.Update();
         paddle.Update();
         life.Update();
+        score.Update();
          
         this.repaint();
     }
@@ -87,14 +91,15 @@ public class GamePanel extends JPanel{
             for (int j = 0; j < 16; j++) {
                 Block b = blocks[i][j];
                 if(b.alive){
-                    if(ball.getLeft() < b.getRight() && ball.getRight() > b.getLeft() || ball.getLeft() < b.getRight() && ball.getRight() > b.getLeft()){
+                    if(ball.getLeft() < b.getRight() && ball.getRight() > b.getLeft() || ball.getLeft() < b.getRight() && ball.getRight() > b.getLeft()){                        
                         if(ball.getUp() < b.getDown() && ball.getDown() > b.getUp() || ball.getDown() < b.getUp() && ball.getUp() > b.getDown()){
                         ball.speedY *= -1; 
+                        GameFrame.points += 10;
                         b.Die();
                         if(ball.getMiddleX() < b.getRight() && ball.getMiddleX() > b.getLeft()){}                                                
                         else{
                             ball.speedX *= -1;
-                        }
+                            }
                         }
                     }
                     }
